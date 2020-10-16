@@ -7,8 +7,8 @@ import Model.State;
 import View.IView;
 
 public class ControllerImpl implements IController {
-    private IView view;
-    private IModel model;
+    private final IView view;
+    private final IModel model;
 
     public ControllerImpl(IModel model, IView view) {
         this.view = view;
