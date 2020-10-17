@@ -2,6 +2,8 @@ package backend;
 
 import Model.*;
 
+import java.sql.SQLException;
+
 public interface DataBaseWrite {
 
     /**
@@ -43,7 +45,7 @@ public interface DataBaseWrite {
     interface OnWriteListener {
 
         /**
-         * @param result
+         * @param result true si los cambios fueron hechos
          */
         void onWrite(boolean result);
 

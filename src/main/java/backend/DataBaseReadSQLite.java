@@ -5,6 +5,22 @@ import Model.*;
 import java.util.List;
 
 public class DataBaseReadSQLite implements DataBaseRead {
+
+    private static DataBaseReadSQLite instance;
+
+    private SQLDataBase dataBaseSQLite;
+
+    private DataBaseReadSQLite() {
+        dataBaseSQLite = SQLDataBaseLite.getInstance();
+    }
+
+    public static DataBaseReadSQLite getInstance() {
+        if (instance == null) {
+            instance = new DataBaseReadSQLite();
+        }
+        return instance;
+    }
+
     @Override
     public List<User> getUserList(Bundle bundle, OnUserListReadListener listener) {
         return null;
