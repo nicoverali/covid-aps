@@ -22,32 +22,32 @@ public class DataBaseReadSQLite implements DataBaseRead {
     }
 
     @Override
-    public List<User> getUserList(Bundle bundle, OnUserListReadListener listener) {
-        return null;
+    public void getUserList(Bundle bundle, OnUserListReadListener listener) {
+
     }
 
     @Override
-    public List<State> getStateList(Bundle bundle, OnStateListReadListener listener) {
-        return null;
+    public void getStateList(Bundle bundle, OnStateListReadListener listener) {
+
     }
 
     @Override
-    public List<District> getDistrictList(Bundle bundle, OnDistrictListReadListener listener) {
-        return null;
+    public void getDistrictList(Bundle bundle, OnDistrictListReadListener listener) {
+
     }
 
     @Override
-    public List<SanitaryRegion> getSanitaryRegionList(Bundle bundle, OnSanitaryRegionListReadListener listener) {
-        return null;
+    public void getSanitaryRegionList(Bundle bundle, OnSanitaryRegionListReadListener listener) {
+
     }
 
     @Override
-    public List<Mayor> getMayorList(Bundle bundle, OnMayorListReadListener listener) {
-        return null;
+    public void getMayorList(Bundle bundle, OnMayorListReadListener listener) {
+
     }
 
     @Override
-    public List<Establishment> getEstablishmentList(Bundle bundle, OnEstablishmentListReadListener listener) {
-        return null;
+    public void getEstablishmentList(Bundle bundle, OnEstablishmentListReadListener listener) {
+
     }
 }

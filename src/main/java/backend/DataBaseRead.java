@@ -12,42 +12,42 @@ public interface DataBaseRead {
      * @param bundle   bundle para almacenar datos filtrables
      * @param listener listener de finalizacion
      */
-    List<User> getUserList(Bundle bundle, OnUserListReadListener listener);
+    void getUserList(Bundle bundle, OnUserListReadListener listener);
 
     /**
      * @param bundle
      * @param listener
      * @return
      */
-    List<State> getStateList(Bundle bundle, OnStateListReadListener listener);
+    void getStateList(Bundle bundle, OnStateListReadListener listener);
 
     /**
      * @param bundle
      * @param listener
      * @return
      */
-    List<District> getDistrictList(Bundle bundle, OnDistrictListReadListener listener);
+    void getDistrictList(Bundle bundle, OnDistrictListReadListener listener);
 
     /**
      * @param bundle
      * @param listener
      * @return
      */
-    List<SanitaryRegion> getSanitaryRegionList(Bundle bundle, OnSanitaryRegionListReadListener listener);
+    void getSanitaryRegionList(Bundle bundle, OnSanitaryRegionListReadListener listener);
 
     /**
      * @param bundle
      * @param listener
      * @return
      */
-    List<Mayor> getMayorList(Bundle bundle, OnMayorListReadListener listener);
+    void getMayorList(Bundle bundle, OnMayorListReadListener listener);
 
     /**
      * @param bundle
      * @param listener
      * @return
      */
-    List<Establishment> getEstablishmentList(Bundle bundle, OnEstablishmentListReadListener listener);
+    void getEstablishmentList(Bundle bundle, OnEstablishmentListReadListener listener);
 
 
     interface OnUserListReadListener {
