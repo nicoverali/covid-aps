@@ -2,8 +2,7 @@ package backend;
 
 import Model.*;
 
-import java.sql.SQLException;
-
+//TODO por ahi faltan los metodos para hcer drop...
 public interface DataBaseWrite {
 
     /**

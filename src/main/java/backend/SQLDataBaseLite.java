@@ -7,9 +7,16 @@ import java.sql.*;
 
 public class SQLDataBaseLite implements SQLDataBase {
 
+    public static final String DB_STATE_TABLE = "State";
+    public static final String DB_DISTRICT_TABLE = "District";
+    public static final String DB_ESTABLISHMENT_TABLE = "Establishment";
+    public static final String DB_MAYOR_TABLE = "Mayor";
+    public static final String DB_SANITARYREGION_TABLE = "region_sanitaria";
+    public static final String DB_USER_TABLE = "User";
+    public static final String DB_ROLE_TABLE = "Rol";
+
     private static final String DB_RELATIVE_PATH = "database.db";
     private static SQLDataBaseLite instance;
-
     private Connection c;
 
     private SQLDataBaseLite() {
@@ -29,42 +36,31 @@ public class SQLDataBaseLite implements SQLDataBase {
     }
 
     @Override
-    public void executeUpdate(String sqlUpdate) {
-        try {
-
-            Statement statement = c.createStatement();
-            statement.executeUpdate(sqlUpdate);
-            statement.close();
-
-        } catch (SQLException e) {
-            //TODO manage exception
-            e.printStackTrace();
-        }
+    public void executeUpdate(String sqlUpdate) throws SQLException {
+        Statement statement = c.createStatement();
+        statement.executeUpdate(sqlUpdate);
+        statement.close();
     }
 
     @Override
-    public ResultSet executeQuery(String sqlQuery) {
-        CachedRowSet rowSet = null;
+    public ResultSet executeQuery(String sqlQuery) throws SQLException {
+        CachedRowSet rowSet;
 
-        try {
+        Statement statement = c.createStatement();
+        ResultSet resultSet = statement.executeQuery(sqlQuery);
 
-            Statement statement = c.createStatement();
-            ResultSet resultSet = statement.executeQuery(sqlQuery);
-            rowSet = createCachedResultSet(resultSet);
-            statement.close();
+        rowSet = createCachedResultSet(resultSet);
 
-        } catch (SQLException e) {
-            //TODO manage exception
-            e.printStackTrace();
-        }
+        statement.close();
+
         return rowSet;
     }
 
     private CachedRowSet createCachedResultSet(ResultSet resultSet) throws SQLException {
-        CachedRowSet rowset;
+        CachedRowSet rowSet;
         RowSetFactory factory = RowSetProvider.newFactory();
-        rowset = factory.createCachedRowSet();
-        rowset.populate(resultSet);
-        return rowset;
+        rowSet = factory.createCachedRowSet();
+        rowSet.populate(resultSet);
+        return rowSet;
     }
 }

@@ -2,11 +2,13 @@ package backend;
 
 import Model.*;
 
+import java.sql.SQLException;
+
 public class DataBaseWriteSQLite implements DataBaseWrite {
 
     private static DataBaseWriteSQLite instance;
-    private final String DB_STATE_TABLE = "State";
-    private SQLDataBase dataBase;
+
+    private final SQLDataBase dataBase;
 
     private DataBaseWriteSQLite() {
         dataBase = SQLDataBaseLite.getInstance();
@@ -36,15 +38,21 @@ public class DataBaseWriteSQLite implements DataBaseWrite {
 
     @Override
     public void write(State state, OnWriteListener listener) {
+        try {
 
-        // NULL indica que el valor del id se autoincremente
-        dataBase.executeUpdate("INSERT OR REPLACE INTO " +
-                DB_STATE_TABLE +
-                " VALUES (NULL," +
-                "\"" + state.getName() + "\"" +
-                ");");
+            String sqlUpdate = "INSERT OR REPLACE INTO " +
+                    SQLDataBaseLite.DB_STATE_TABLE +
+                    " VALUES (" +
+                    "NULL," + // NULL indica que el valor del id se autoincremente
+                    "\"" + state.getName() + "\"" +
+                    ");";
 
-        listener.onWrite(true);
+            dataBase.executeUpdate(sqlUpdate);
+
+            listener.onWrite(true);
+        } catch (SQLException throwables) {
+            listener.onWrite(false);
+        }
     }
 
     @Override

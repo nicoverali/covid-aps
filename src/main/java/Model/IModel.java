@@ -1,5 +1,6 @@
 package Model;
 
+//TODO hay que agregar los IDS a los modelos
 public interface IModel {
     void setListener(IModelListener listener);
 

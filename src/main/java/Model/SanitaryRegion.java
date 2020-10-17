@@ -3,14 +3,14 @@ package Model;
 import java.util.ArrayList;
 
 public class SanitaryRegion extends Environment {
+    private final ArrayList<District> districts;
     private String name;
     private int id;
-    private final ArrayList<District> districts;
 
     public SanitaryRegion(String name, int id) {
         this.name = name;
         this.id = id;
-        districts = new ArrayList<District>();
+        districts = new ArrayList<>();
     }
 
     public void addDistrict(District district) {
