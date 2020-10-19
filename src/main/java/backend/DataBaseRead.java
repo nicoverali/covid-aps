@@ -55,23 +55,23 @@ public interface DataBaseRead {
     }
 
     interface OnStateListReadListener {
-        void onRead(List<State> userList);
+        void onRead(List<State> stateList);
     }
 
     interface OnDistrictListReadListener {
-        void onRead(List<District> userList);
+        void onRead(List<District> districtList);
     }
 
     interface OnSanitaryRegionListReadListener {
-        void onRead(List<SanitaryRegion> userList);
+        void onRead(List<SanitaryRegion> SanitaryRegionList);
     }
 
     interface OnMayorListReadListener {
-        void onRead(List<Mayor> userList);
+        void onRead(List<Mayor> mayorList);
     }
 
     interface OnEstablishmentListReadListener {
-        void onRead(List<Establishment> userList);
+        void onRead(List<Establishment> establishmentList);
     }
 
 }

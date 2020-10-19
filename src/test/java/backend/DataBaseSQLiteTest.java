@@ -39,8 +39,8 @@ class DataBaseSQLiteTest {
 
     private void getWithoutFilter() {
         DataBaseRead dataBaseRead = DataBaseReadSQLite.getInstance();
-        dataBaseRead.getStateList(null, userList ->
-                assertEquals(userList.get(0).getName(), "RioNegro")
+        dataBaseRead.getStateList(null, stateList ->
+                assertEquals(stateList.get(0).getName(), "RioNegro")
         );
     }
 

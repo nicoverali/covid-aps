@@ -76,11 +76,13 @@ public class DataBaseWriteSQLite implements DataBaseWrite {
     @Override
     public void write(State state, OnWriteListener listener) {
         try {
+            // NULL indica que el valor del id se autoincremente
+            String id = state.getId() != -1 ? String.valueOf(state.getId()) : "NULL";
 
             String sqlUpdate = "INSERT OR REPLACE INTO " +
                     SQLDataBaseLite.DB_STATE_TABLE +
                     " VALUES (" +
-                    "NULL," + // NULL indica que el valor del id se autoincremente
+                    id + "," +
                     "\"" + state.getName() + "\"" +
                     ");";
 

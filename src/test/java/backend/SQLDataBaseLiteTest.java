@@ -13,9 +13,9 @@ class SQLDataBaseLiteTest {
     public void test() throws SQLException {
         SQLDataBase sqlDataBase = SQLDataBaseLite.getInstance();
 
-        sqlDataBase.executeUpdate("INSERT OR REPLACE INTO Rol(tipo) VALUES (\"admin\")");
+        sqlDataBase.executeUpdate("INSERT OR REPLACE INTO State VALUES (1, \"Chubut\")");
 
-        ResultSet resultSet = sqlDataBase.executeQuery("SELECT * FROM Usuario");
+        ResultSet resultSet = sqlDataBase.executeQuery("SELECT * FROM Rol");
         while (resultSet.next()) {
             String nombre = resultSet.getString("tipo");
             assertEquals(nombre, "admin");
