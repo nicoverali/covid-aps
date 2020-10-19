@@ -4,12 +4,17 @@ import java.util.ArrayList;
 
 public class State extends Environment {
     private String name;
-    private int id_state;
+    private int id;
     private ArrayList<District> myDistricts;
 
     public State(String name) {
+        this(-1, name);
+    }
+
+    public State(int id, String name) {
         this.name = name;
-        myDistricts = new ArrayList<District>();
+        this.id = id;
+        myDistricts = new ArrayList<>();
     }
 
     public ArrayList<District> getMyDistricts() {
@@ -32,11 +37,12 @@ public class State extends Environment {
         this.name = name;
     }
 
-    public int getId_state() {
-        return id_state;
+    //TODO ids deben tener valor por defecto -1
+    public int getId() {
+        return id;
     }
 
-    public void setId_state(int id_state) {
-        this.id_state = id_state;
+    public void setId(int id) {
+        this.id = id;
     }
 }

@@ -54,7 +54,7 @@ public class DataBaseReadSQLite implements DataBaseRead {
             return sqlBuilder.toString();
         }
 
-        return sqlQuery;
+        return sqlQuery + ";";
     }
 
     @Override
@@ -81,16 +81,17 @@ public class DataBaseReadSQLite implements DataBaseRead {
         List<State> stateList = new ArrayList<>();
 
         String nombre;
+        int id;
         State state;
         while (resultSet.next()) {
             nombre = resultSet.getString("nombre");
-            state = new State(nombre);
+            id = resultSet.getInt("id");
+            state = new State(id, nombre);
 
             stateList.add(state);
         }
         return stateList;
     }
-
 
     @Override
     public void getDistrictList(Bundle bundle, OnDistrictListReadListener listener) {
