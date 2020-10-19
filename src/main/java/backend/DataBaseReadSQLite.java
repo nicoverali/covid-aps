@@ -1,5 +1,6 @@
 package backend;
 
+import Model.SanitaryRegion;
 import Model.State;
 
 import java.sql.ResultSet;
@@ -99,7 +100,33 @@ public class DataBaseReadSQLite implements DataBaseRead {
 
     @Override
     public void getSanitaryRegionList(Bundle bundle, OnSanitaryRegionListReadListener listener) {
+        String sqlQuery = "SELECT * FROM " + SQLDataBaseLite.DB_STATE_TABLE;
+        sqlQuery = addConditions(bundle, sqlQuery);
 
+        try {
+            ResultSet resultSet = dataBaseSQLite.executeQuery(sqlQuery);
+            List<SanitaryRegion> sanitaryRegionsList = buildsanitariesFromResultSet(resultSet);
+            listener.onRead(sanitaryRegionsList);
+
+        } catch (SQLException ignored) {
+            listener.onRead(null);
+        }
+    }
+
+    private List<SanitaryRegion> buildsanitariesFromResultSet(ResultSet resultSet) throws SQLException {
+        List<SanitaryRegion> sanitaryRegionsList = new ArrayList<>();
+
+        String nombre;
+        int id;
+        SanitaryRegion sanitaryRegion;
+        while (resultSet.next()) {
+            nombre = resultSet.getString("nombre");
+            id = resultSet.getInt("id");
+            sanitaryRegion = new SanitaryRegion(nombre,id);
+
+            sanitaryRegionsList.add(sanitaryRegion);
+        }
+        return sanitaryRegionsList;
     }
 
     @Override

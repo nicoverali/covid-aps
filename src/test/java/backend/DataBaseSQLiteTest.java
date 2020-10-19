@@ -1,5 +1,6 @@
 package backend;
 
+import Model.SanitaryRegion;
 import Model.State;
 import org.junit.jupiter.api.Test;
 
@@ -17,6 +18,23 @@ class DataBaseSQLiteTest {
                 getWithFilter();
             }
         });
+    }
+
+    @Test
+    public void testSanitaryInsert(){
+        DataBaseWrite dbWrite = DataBaseWriteSQLite.getInstance();
+
+        dbWrite.write(new SanitaryRegion("Zona1",1),result -> {
+            if(result){
+                getWithoutFilter2();
+            }
+        });
+    }
+    private void getWithoutFilter2(){
+        DataBaseRead dataBaseRead = DataBaseReadSQLite.getInstance();
+        dataBaseRead.getStateList(null, userList ->
+                assertEquals(userList.get(0).getName(), "Zona1")
+        );
     }
 
     private void getWithoutFilter() {

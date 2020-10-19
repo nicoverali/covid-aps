@@ -7,16 +7,25 @@ public class Mayor {
     private String surname;
     private Date birthDate;
     private District myDistrict;
+    private int id;
 
-    public Mayor(String name, String surname, Date birthDate, District district) {
+    public Mayor(String name, String surname, Date birthDate, District district, int id) {
         this.name = name;
         this.surname = surname;
         this.birthDate = birthDate;
         myDistrict = district;
+        this.id = id;
     }
 
     public District getMyDistrict() {
         return myDistrict;
+    }
+    public void setId(int id){
+        this.id = id;
+    }
+
+    public int getId(){
+        return id;
     }
 
     public void setMyDistrict(District myDistrict) {
