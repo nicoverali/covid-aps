@@ -5,46 +5,50 @@ import Model.State;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.fail;
 
 class DataBaseSQLiteTest {
 
     @Test
-    public void test() {
+    public void testState() {
         DataBaseWrite dbWrite = DataBaseWriteSQLite.getInstance();
 
         dbWrite.write(new State("RioNegro"), result -> {
             if (result) {
-                getWithoutFilter();
-                getWithFilter();
+                getWithoutFilterState();
+                getWithFilterState();
+            } else {
+                fail();
             }
         });
     }
 
     @Test
-    public void testSanitaryInsert(){
+    public void testSanitaryInsert() {
         DataBaseWrite dbWrite = DataBaseWriteSQLite.getInstance();
 
-        dbWrite.write(new SanitaryRegion("Zona1",1),result -> {
-            if(result){
-                getWithoutFilter2();
+        dbWrite.write(new SanitaryRegion("Zona1", 1), result -> {
+            if (result) {
+                getWithoutFilterSanitary();
             }
         });
     }
-    private void getWithoutFilter2(){
+
+    private void getWithoutFilterSanitary() {
         DataBaseRead dataBaseRead = DataBaseReadSQLite.getInstance();
         dataBaseRead.getStateList(null, userList ->
                 assertEquals(userList.get(0).getName(), "Zona1")
         );
     }
 
-    private void getWithoutFilter() {
+    private void getWithoutFilterState() {
         DataBaseRead dataBaseRead = DataBaseReadSQLite.getInstance();
         dataBaseRead.getStateList(null, stateList ->
                 assertEquals(stateList.get(0).getName(), "RioNegro")
         );
     }
 
-    private void getWithFilter() {
+    private void getWithFilterState() {
         DataBaseRead dataBaseRead = DataBaseReadSQLite.getInstance();
 
         Bundle bundle = new Bundle();

@@ -35,12 +35,6 @@ public interface DataBaseWrite {
      */
     void write(SanitaryRegion sanitaryRegion, OnWriteListener listener);
 
-    /**
-     * @param mayor
-     * @param listener
-     */
-    void write(Mayor mayor, OnWriteListener listener);
-
     interface OnWriteListener {
 
         /**

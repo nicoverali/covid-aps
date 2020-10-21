@@ -1,82 +1,26 @@
 package Model;
 
-import java.util.ArrayList;
-
 public class District extends Environment {
-    private float surface;
+    private final int id;
     private String name;
-    private int population;
-    private int id_district;
-    private int zipCode; // ?
+    private int sateId, sanitaryRegionId;
+    private int zipCode, population;
 
-    private SanitaryRegion mySanitaryRegion;
-    private State myState;
-    private ArrayList<Establishment> myEstablishments;
-    private Mayor myMayor;
+    public District(String name, int stateId, int sanitaryRegionId, int zipCode, int population) {
+        this(-1, name, stateId, sanitaryRegionId, zipCode, population);
+    }
 
-    public District(float surface, String name, int population, int id_district, int zipCode, SanitaryRegion mySanitaryRegion,
-                    State myState, Mayor mayor) {
-        this.surface = surface;
+    public District(int id, String name, int stateId, int sanitaryRegionId, int zipCode, int population) {
+        this.id = id;
         this.name = name;
-        this.population = population;
-        this.id_district = id_district;
+        this.sateId = stateId;
+        this.sanitaryRegionId = sanitaryRegionId;
         this.zipCode = zipCode;
-        this.mySanitaryRegion = mySanitaryRegion;
-        myEstablishments = new ArrayList<>();
-        this.myState = myState;
-        myMayor = mayor;
+        this.population = population;
     }
 
-    public SanitaryRegion getMySanitaryRegion() {
-        return mySanitaryRegion;
-    }
-
-    public void setMySanitaryRegion(SanitaryRegion mySanitaryRegion) {
-        this.mySanitaryRegion = mySanitaryRegion;
-    }
-
-    public State getMyState() {
-        return myState;
-    }
-
-    public void setMyState(State myState) {
-        this.myState = myState;
-    }
-
-    public Mayor getMyMayor() {
-        return myMayor;
-    }
-
-    public void setMyMayor(Mayor myMayor) {
-        this.myMayor = myMayor;
-    }
-
-    public ArrayList<Establishment> getMyEstablishments() {
-        return myEstablishments;
-    }
-
-    public void setMyEstablishments(ArrayList<Establishment> myEstablishments) {
-        this.myEstablishments = myEstablishments;
-    }
-
-    public void addEstablishment(Establishment establishment) {
-        myEstablishments.add(establishment);
-    }
-
-    public SanitaryRegion getSanitaryRegion() {
-        return mySanitaryRegion;
-    }
-
-    public void setSanitaryRegion(SanitaryRegion sanitaryRegion) {
-        this.mySanitaryRegion = sanitaryRegion;
-    }
-
-    public float getSurface() {
-        return surface;
-    }
-
-    public void setSurface(float surface) {
-        this.surface = surface;
+    public int getId() {
+        return id;
     }
 
     public String getName() {
@@ -87,20 +31,20 @@ public class District extends Environment {
         this.name = name;
     }
 
-    public int getPopulation() {
-        return population;
+    public int getSateId() {
+        return sateId;
     }
 
-    public void setPopulation(int population) {
-        this.population = population;
+    public void setSateId(int sateId) {
+        this.sateId = sateId;
     }
 
-    public int getId_district() {
-        return id_district;
+    public int getSanitaryRegionId() {
+        return sanitaryRegionId;
     }
 
-    public void setId_district(int id_district) {
-        this.id_district = id_district;
+    public void setSanitaryRegionId(int sanitaryRegionId) {
+        this.sanitaryRegionId = sanitaryRegionId;
     }
 
     public int getZipCode() {
@@ -109,5 +53,13 @@ public class District extends Environment {
 
     public void setZipCode(int zipCode) {
         this.zipCode = zipCode;
+    }
+
+    public int getPopulation() {
+        return population;
+    }
+
+    public void setPopulation(int population) {
+        this.population = population;
     }
 }

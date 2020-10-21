@@ -40,13 +40,6 @@ public interface DataBaseRead {
      * @param listener
      * @return
      */
-    void getMayorList(Bundle bundle, OnMayorListReadListener listener);
-
-    /**
-     * @param bundle
-     * @param listener
-     * @return
-     */
     void getEstablishmentList(Bundle bundle, OnEstablishmentListReadListener listener);
 
 
@@ -64,10 +57,6 @@ public interface DataBaseRead {
 
     interface OnSanitaryRegionListReadListener {
         void onRead(List<SanitaryRegion> SanitaryRegionList);
-    }
-
-    interface OnMayorListReadListener {
-        void onRead(List<Mayor> mayorList);
     }
 
     interface OnEstablishmentListReadListener {

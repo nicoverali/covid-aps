@@ -2,18 +2,26 @@ package Model;
 
 public class User {
     private int dni;
+    private final String password;
     private String email;
-    private int tel;
-    private String category; // podria ser un enum
     private String name;
+    private String phonenumber;
+    private String category; // podria ser un enum
+    private int roleId;
     private boolean is_valid;
 
-    public User(int dni, String email, int tel, String cat, String name, boolean is_valid) {
+    public User(String name, String email, String password, String phonenumber, String category, int roleId, boolean is_valid) {
+        this(-1, name, email, password, phonenumber, category, roleId, is_valid);
+    }
+
+    public User(int dni, String name, String email, String password, String phonenumber, String category, int roleId, boolean is_valid) {
         this.dni = dni;
-        this.email = email;
-        this.tel = tel;
-        this.category = cat;
         this.name = name;
+        this.email = email;
+        this.password = password;
+        this.phonenumber = phonenumber;
+        this.category = category;
+        this.roleId = roleId;
         this.is_valid = is_valid;
     }
 
@@ -25,6 +33,14 @@ public class User {
         this.dni = dni;
     }
 
+    public String getPassword() {
+        return password;
+    }
+
+    public int getId() {
+        return dni;
+    }
+
     public String getEmail() {
         return email;
     }
@@ -33,12 +49,20 @@ public class User {
         this.email = email;
     }
 
-    public int getTel() {
-        return tel;
+    public String getPhonenumber() {
+        return phonenumber;
     }
 
-    public void setTel(int tel) {
-        this.tel = tel;
+    public void setPhonenumber(String phonenumber) {
+        this.phonenumber = phonenumber;
+    }
+
+    public int getRoleId() {
+        return roleId;
+    }
+
+    public void setRoleId(int roleId) {
+        this.roleId = roleId;
     }
 
     public String getCategory() {
@@ -57,7 +81,7 @@ public class User {
         this.name = name;
     }
 
-    public boolean isIs_valid() {
+    public boolean is_valid() {
         return is_valid;
     }
 

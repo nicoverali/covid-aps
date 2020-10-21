@@ -1,7 +1,6 @@
 package backend;
 
-import Model.SanitaryRegion;
-import Model.State;
+import Model.*;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -60,7 +59,41 @@ public class DataBaseReadSQLite implements DataBaseRead {
 
     @Override
     public void getUserList(Bundle bundle, OnUserListReadListener listener) {
+        String sqlQuery = "SELECT * FROM " + SQLDataBaseLite.DB_USER_TABLE;
+        sqlQuery = addConditions(bundle, sqlQuery);
 
+        try {
+            ResultSet resultSet = dataBaseSQLite.executeQuery(sqlQuery);
+            List<User> userList = buildUsersFromResultSet(resultSet);
+            listener.onRead(userList);
+
+        } catch (SQLException ignored) {
+            listener.onRead(null);
+        }
+    }
+
+    private List<User> buildUsersFromResultSet(ResultSet resultSet) throws SQLException {
+        List<User> userList = new ArrayList<>();
+
+        int id, roleId;
+        String name, email, password, phonenumber, category;
+        boolean is_valid;
+        User user;
+        while (resultSet.next()) {
+            id = resultSet.getInt("dni");
+            name = resultSet.getString("name");
+            email = resultSet.getString("email");
+            password = resultSet.getString("password");
+            phonenumber = resultSet.getString("phonenumber");
+            category = resultSet.getString("category");
+            roleId = resultSet.getInt("role");
+            is_valid = resultSet.getBoolean("is_valid");
+
+            user = new User(id, name, email, password, phonenumber, category, roleId, is_valid);
+
+            userList.add(user);
+        }
+        return userList;
     }
 
     @Override
@@ -85,7 +118,7 @@ public class DataBaseReadSQLite implements DataBaseRead {
         int id;
         State state;
         while (resultSet.next()) {
-            nombre = resultSet.getString("nombre");
+            nombre = resultSet.getString("name");
             id = resultSet.getInt("id");
             state = new State(id, nombre);
 
@@ -96,12 +129,43 @@ public class DataBaseReadSQLite implements DataBaseRead {
 
     @Override
     public void getDistrictList(Bundle bundle, OnDistrictListReadListener listener) {
+        String sqlQuery = "SELECT * FROM " + SQLDataBaseLite.DB_DISTRICT_TABLE;
+        sqlQuery = addConditions(bundle, sqlQuery);
 
+        try {
+            ResultSet resultSet = dataBaseSQLite.executeQuery(sqlQuery);
+            List<District> districtList = buildDistrictFromResultSet(resultSet);
+            listener.onRead(districtList);
+
+        } catch (SQLException ignored) {
+            listener.onRead(null);
+        }
+    }
+
+    private List<District> buildDistrictFromResultSet(ResultSet resultSet) throws SQLException {
+        List<District> districtList = new ArrayList<>();
+
+        int id, stateId, sanitaryRegionId, zipCode, population;
+        String name;
+        District district;
+        while (resultSet.next()) {
+            id = resultSet.getInt("id");
+            name = resultSet.getString("name");
+            stateId = resultSet.getInt("state");
+            sanitaryRegionId = resultSet.getInt("sanitary_region");
+            zipCode = resultSet.getInt("zip_code");
+            population = resultSet.getInt("population");
+
+            district = new District(id, name, stateId, sanitaryRegionId, zipCode, population);
+
+            districtList.add(district);
+        }
+        return districtList;
     }
 
     @Override
     public void getSanitaryRegionList(Bundle bundle, OnSanitaryRegionListReadListener listener) {
-        String sqlQuery = "SELECT * FROM " + SQLDataBaseLite.DB_STATE_TABLE;
+        String sqlQuery = "SELECT * FROM " + SQLDataBaseLite.DB_SANITARYREGION_TABLE;
         sqlQuery = addConditions(bundle, sqlQuery);
 
         try {
@@ -121,9 +185,9 @@ public class DataBaseReadSQLite implements DataBaseRead {
         int id;
         SanitaryRegion sanitaryRegion;
         while (resultSet.next()) {
-            nombre = resultSet.getString("nombre");
+            nombre = resultSet.getString("name");
             id = resultSet.getInt("id");
-            sanitaryRegion = new SanitaryRegion(nombre,id);
+            sanitaryRegion = new SanitaryRegion(nombre, id);
 
             sanitaryRegionsList.add(sanitaryRegion);
         }
@@ -131,12 +195,38 @@ public class DataBaseReadSQLite implements DataBaseRead {
     }
 
     @Override
-    public void getMayorList(Bundle bundle, OnMayorListReadListener listener) {
+    public void getEstablishmentList(Bundle bundle, OnEstablishmentListReadListener listener) {
+        String sqlQuery = "SELECT * FROM " + SQLDataBaseLite.DB_ESTABLISHMENT_TABLE;
+        sqlQuery = addConditions(bundle, sqlQuery);
 
+        try {
+            ResultSet resultSet = dataBaseSQLite.executeQuery(sqlQuery);
+            List<Establishment> establishmentList = buildEstablishmentFromResultSet(resultSet);
+            listener.onRead(establishmentList);
+
+        } catch (SQLException ignored) {
+            listener.onRead(null);
+        }
     }
 
-    @Override
-    public void getEstablishmentList(Bundle bundle, OnEstablishmentListReadListener listener) {
+    private List<Establishment> buildEstablishmentFromResultSet(ResultSet resultSet) throws SQLException {
+        List<Establishment> districtList = new ArrayList<>();
 
+        int id, districtId;
+        String name, address;
+        boolean is_valid;
+        Establishment establishment;
+        while (resultSet.next()) {
+            id = resultSet.getInt("id");
+            name = resultSet.getString("name");
+            address = resultSet.getString("address");
+            districtId = resultSet.getInt("districtId");
+            is_valid = resultSet.getBoolean("is_valid");
+
+            establishment = new Establishment(id, name, address, districtId, is_valid);
+
+            districtList.add(establishment);
+        }
+        return districtList;
     }
 }

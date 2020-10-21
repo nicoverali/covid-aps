@@ -23,23 +23,45 @@ public class DataBaseWriteSQLite implements DataBaseWrite {
 
     @Override
     public void write(User user, OnWriteListener listener) {
+        try {
+            String id = user.getId() != -1 ? String.valueOf(user.getId()) : "NULL";
+
+            String sqlUpdate = "INSERT OR REPLACE INTO " +
+                    SQLDataBaseLite.DB_USER_TABLE +
+                    " VALUES (" +
+                    id + "," +
+                    "\"" + user.getName() + "\" ," +
+                    "\"" + user.getEmail() + "\" ," +
+                    "\"" + user.getPassword() + "\" ," +
+                    "\"" + user.getPhonenumber() + "\" ," +
+                    "\"" + user.getCategory() + "\" ," +
+                    "\"" + user.getRoleId() + "\" ," +
+                    user.is_valid() +
+                    ");";
+
+            dataBase.executeUpdate(sqlUpdate);
+
+            listener.onWrite(true);
+        } catch (SQLException throwables) {
+            listener.onWrite(false);
+        }
 
     }
 
     @Override
     public void write(District district, OnWriteListener listener) {
         try {
+            String id = district.getId() != -1 ? String.valueOf(district.getId()) : "NULL";
 
             String sqlUpdate = "INSERT OR REPLACE INTO " +
-                    SQLDataBaseLite.DB_STATE_TABLE +
+                    SQLDataBaseLite.DB_DISTRICT_TABLE +
                     " VALUES (" +
-                    "NULL," + // NULL indica que el valor del id se autoincremente
-                    "\"" + district.getSurface() + "\" ," +
+                    id + "," +
+                    "\"" + district.getName() + "\" ," +
+                    district.getSateId() +
+                    district.getSanitaryRegionId() +
                     district.getZipCode() +
-                    ", \"" +district.getName() + "\" ," +
-                    district.getPopulation()+
-                    district.getMyState() +
-                    district.getMyMayor().getId() +
+                    district.getPopulation() +
                     ");";
 
             dataBase.executeUpdate(sqlUpdate);
@@ -54,15 +76,16 @@ public class DataBaseWriteSQLite implements DataBaseWrite {
     @Override
     public void write(Establishment establishment, OnWriteListener listener) {
         try {
+            String id = establishment.getId() != -1 ? String.valueOf(establishment.getId()) : "NULL";
 
             String sqlUpdate = "INSERT OR REPLACE INTO " +
-                    SQLDataBaseLite.DB_STATE_TABLE +
+                    SQLDataBaseLite.DB_ESTABLISHMENT_TABLE +
                     " VALUES (" +
-                    "NULL," + // NULL indica que el valor del id se autoincremente
+                    id + "," +
+                    ", \"" + establishment.getName() + "\" ," +
                     "\"" + establishment.getAddress() + "\" ," +
-                    establishment.isIs_valid()+
-                     ", \"" + establishment.getName() + "\" ," +
-                    establishment.getId() +
+                    establishment.getDistrictId() +
+                    establishment.isValid() +
                     ");";
 
             dataBase.executeUpdate(sqlUpdate);
@@ -97,41 +120,23 @@ public class DataBaseWriteSQLite implements DataBaseWrite {
     @Override
     public void write(SanitaryRegion sanitaryRegion, OnWriteListener listener) {
         try {
+            String id = sanitaryRegion.getId() != -1 ? String.valueOf(sanitaryRegion.getId()) : "NULL";
 
             String sqlUpdate = "INSERT OR REPLACE INTO " +
-                    SQLDataBaseLite.DB_STATE_TABLE +
+                    SQLDataBaseLite.DB_SANITARYREGION_TABLE +
                     " VALUES (" +
-                    "NULL," + // NULL indica que el valor del id se autoincremente
+                    id + "," +
                     "\"" + sanitaryRegion.getName() + "\"" +
-                    sanitaryRegion.getId() +
+                    sanitaryRegion.getDistricts() + // TODO no entiendo la relacion district-sanitaryregion
                     ");";
 
             dataBase.executeUpdate(sqlUpdate);
 
             listener.onWrite(true);
+
         } catch (SQLException throwables) {
             listener.onWrite(false);
         }
     }
 
-    @Override
-    public void write(Mayor mayor, OnWriteListener listener) {
-        try {
-
-            String sqlUpdate = "INSERT OR REPLACE INTO " +
-                    SQLDataBaseLite.DB_STATE_TABLE +
-                    " VALUES (" +
-                    "NULL," + // NULL indica que el valor del id se autoincremente
-                    "\"" + mayor.getName() + "\"" +
-                    ", \"" + mayor.getSurname() + "\""+
-                    mayor.getBirthDate() +
-                    ");";
-
-            dataBase.executeUpdate(sqlUpdate);
-
-            listener.onWrite(true);
-        } catch (SQLException throwables) {
-            listener.onWrite(false);
-        }
-    }
 }

@@ -11,11 +11,11 @@ public class SQLDataBaseLite implements SQLDataBase {
     public static final String DB_DISTRICT_TABLE = "District";
     public static final String DB_ESTABLISHMENT_TABLE = "Establishment";
     public static final String DB_MAYOR_TABLE = "Mayor";
-    public static final String DB_SANITARYREGION_TABLE = "region_sanitaria";
+    public static final String DB_SANITARYREGION_TABLE = "SanitaryRegion";
     public static final String DB_USER_TABLE = "User";
-    public static final String DB_ROLE_TABLE = "Rol";
-
+    public static final String DB_ROLE_TABLE = "Role";
     private static final String DB_RELATIVE_PATH = "database.db";
+
     private static SQLDataBaseLite instance;
     private Connection c;
 
