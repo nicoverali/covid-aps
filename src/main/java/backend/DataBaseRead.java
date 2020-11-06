@@ -1,6 +1,6 @@
 package backend;
 
-import Model.*;
+import model.*;
 
 import java.util.List;
 

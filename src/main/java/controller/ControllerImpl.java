@@ -1,10 +1,9 @@
-package Controller;
+package controller;
 
-import Model.IModel;
-import Model.Mayor;
-import Model.SanitaryRegion;
-import Model.State;
-import View.IView;
+import model.IModel;
+import model.SanitaryRegion;
+import model.State;
+import view.IView;
 
 public class ControllerImpl implements IController {
     private final IView view;
@@ -39,12 +38,12 @@ public class ControllerImpl implements IController {
         model.deleteState(id_state);
     }
 
-    public void onCreateDistrictEvent(float surface, String name, int population, int id_district, int zipCode, SanitaryRegion mySanitaryRegion, State myState, Mayor mayor) {
-        model.createDistrict(surface, name, population, id_district, zipCode, mySanitaryRegion, myState, mayor);
+    public void onCreateDistrictEvent(float surface, String name, int population, int id_district, int zipCode, SanitaryRegion mySanitaryRegion, State myState) {
+        model.createDistrict(surface, name, population, id_district, zipCode, mySanitaryRegion, myState);
     }
 
-    public void onUpdateDistrictEvent(float surface, String name, int population, int id_district, int zipCode, SanitaryRegion mySanitaryRegion, State myState, Mayor mayor) {
-        model.updateDistrict(surface, name, population, id_district, zipCode, mySanitaryRegion, myState, mayor);
+    public void onUpdateDistrictEvent(float surface, String name, int population, int id_district, int zipCode, SanitaryRegion mySanitaryRegion, State myState) {
+        model.updateDistrict(surface, name, population, id_district, zipCode, mySanitaryRegion, myState);
     }
 
     public void onDeleteDistrictEvent(int id_district) {

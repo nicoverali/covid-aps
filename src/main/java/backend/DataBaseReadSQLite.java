@@ -1,6 +1,6 @@
 package backend;
 
-import Model.*;
+import model.*;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -75,18 +75,18 @@ public class DataBaseReadSQLite implements DataBaseRead {
     private List<User> buildUsersFromResultSet(ResultSet resultSet) throws SQLException {
         List<User> userList = new ArrayList<>();
 
-        int id, roleId;
-        String name, email, password, phonenumber, category;
+
+        String id, name, email, password, phonenumber, category, roleId;
         boolean is_valid;
         User user;
         while (resultSet.next()) {
-            id = resultSet.getInt("dni");
+            id = resultSet.getString("dni");
             name = resultSet.getString("name");
             email = resultSet.getString("email");
             password = resultSet.getString("password");
             phonenumber = resultSet.getString("phonenumber");
             category = resultSet.getString("category");
-            roleId = resultSet.getInt("role");
+            roleId = resultSet.getString("role");
             is_valid = resultSet.getBoolean("is_valid");
 
             user = new User(id, name, email, password, phonenumber, category, roleId, is_valid);

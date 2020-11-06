@@ -1,7 +1,7 @@
 package backend;
 
-import Model.SanitaryRegion;
-import Model.State;
+import model.SanitaryRegion;
+import model.State;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;

@@ -1,20 +1,17 @@
-package Model;
+package model;
 
 public class User {
-    private int dni;
     private final String password;
+    private String dni;
     private String email;
     private String name;
     private String phonenumber;
-    private String category; // podria ser un enum
-    private int roleId;
+    private String category;
+    private String roleId;
     private boolean is_valid;
 
-    public User(String name, String email, String password, String phonenumber, String category, int roleId, boolean is_valid) {
-        this(-1, name, email, password, phonenumber, category, roleId, is_valid);
-    }
 
-    public User(int dni, String name, String email, String password, String phonenumber, String category, int roleId, boolean is_valid) {
+    public User(String dni, String name, String email, String password, String phonenumber, String category, String roleId, boolean is_valid) {
         this.dni = dni;
         this.name = name;
         this.email = email;
@@ -25,11 +22,11 @@ public class User {
         this.is_valid = is_valid;
     }
 
-    public int getDni() {
+    public String getDni() {
         return dni;
     }
 
-    public void setDni(int dni) {
+    public void setDni(String dni) {
         this.dni = dni;
     }
 
@@ -37,7 +34,7 @@ public class User {
         return password;
     }
 
-    public int getId() {
+    public String getId() {
         return dni;
     }
 
@@ -57,11 +54,11 @@ public class User {
         this.phonenumber = phonenumber;
     }
 
-    public int getRoleId() {
+    public String getRoleId() {
         return roleId;
     }
 
-    public void setRoleId(int roleId) {
+    public void setRoleId(String roleId) {
         this.roleId = roleId;
     }
 

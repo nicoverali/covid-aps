@@ -1,8 +1,8 @@
-package View;
+package view;
 
-import Controller.IController;
-import Model.IModel;
-import Model.IModelListener;
+import controller.IController;
+import model.IModel;
+import model.IModelListener;
 
 public class ViewImpl implements IView {
     private final IModel model;

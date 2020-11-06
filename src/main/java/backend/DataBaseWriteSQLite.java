@@ -1,6 +1,6 @@
 package backend;
 
-import Model.*;
+import model.*;
 
 import java.sql.SQLException;
 
@@ -24,12 +24,10 @@ public class DataBaseWriteSQLite implements DataBaseWrite {
     @Override
     public void write(User user, OnWriteListener listener) {
         try {
-            String id = user.getId() != -1 ? String.valueOf(user.getId()) : "NULL";
-
             String sqlUpdate = "INSERT OR REPLACE INTO " +
                     SQLDataBaseLite.DB_USER_TABLE +
                     " VALUES (" +
-                    id + "," +
+                    user.getId() + "," +
                     "\"" + user.getName() + "\" ," +
                     "\"" + user.getEmail() + "\" ," +
                     "\"" + user.getPassword() + "\" ," +
@@ -133,21 +131,18 @@ public class DataBaseWriteSQLite implements DataBaseWrite {
             dataBase.executeUpdate(sqlUpdate);
 
             listener.onWrite(true);
-
         } catch (SQLException throwables) {
             listener.onWrite(false);
         }
     }
 
     @Override
-    public void drop(User user, OnDropListener listener) throws IllegalArgumentException{
+    public void drop(User user, OnDropListener listener) throws IllegalArgumentException {
         try {
-            if (user.getId() == -1) throw new IllegalArgumentException("The entity must have an ID assigned to drop it from database");
-    
             String sqlDrop = "DELETE FROM " +
-                SQLDataBaseLite.DB_USER_TABLE +
-                "WHERE id = " + user.getId();
-    
+                    SQLDataBaseLite.DB_USER_TABLE +
+                    "WHERE id = " + user.getId();
+
             dataBase.executeUpdate(sqlDrop);
             listener.onDrop(true);
         } catch (SQLException throwables) {
@@ -157,14 +152,15 @@ public class DataBaseWriteSQLite implements DataBaseWrite {
     }
 
     @Override
-    public void drop(District district, OnDropListener listener) throws IllegalArgumentException{
+    public void drop(District district, OnDropListener listener) throws IllegalArgumentException {
         try {
-            if (district.getId() == -1) throw new IllegalArgumentException("The entity must have an ID assigned to drop it from database");
-    
+            if (district.getId() == -1)
+                throw new IllegalArgumentException("The entity must have an ID assigned to drop it from database");
+
             String sqlDrop = "DELETE FROM " +
-                SQLDataBaseLite.DB_DISTRICT_TABLE +
-                "WHERE id = " + district.getId();
-    
+                    SQLDataBaseLite.DB_DISTRICT_TABLE +
+                    "WHERE id = " + district.getId();
+
             dataBase.executeUpdate(sqlDrop);
             listener.onDrop(true);
         } catch (SQLException throwables) {
@@ -173,14 +169,15 @@ public class DataBaseWriteSQLite implements DataBaseWrite {
     }
 
     @Override
-    public void drop(Establishment establishment, OnDropListener listener) throws IllegalArgumentException{
+    public void drop(Establishment establishment, OnDropListener listener) throws IllegalArgumentException {
         try {
-            if (establishment.getId() == -1) throw new IllegalArgumentException("The entity must have an ID assigned to drop it from database");
-    
+            if (establishment.getId() == -1)
+                throw new IllegalArgumentException("The entity must have an ID assigned to drop it from database");
+
             String sqlDrop = "DELETE FROM " +
-                SQLDataBaseLite.DB_ESTABLISHMENT_TABLE +
-                "WHERE id = " + establishment.getId();
-    
+                    SQLDataBaseLite.DB_ESTABLISHMENT_TABLE +
+                    "WHERE id = " + establishment.getId();
+
             dataBase.executeUpdate(sqlDrop);
             listener.onDrop(true);
         } catch (SQLException throwables) {
@@ -189,14 +186,15 @@ public class DataBaseWriteSQLite implements DataBaseWrite {
     }
 
     @Override
-    public void drop(State state, OnDropListener listener) throws IllegalArgumentException{
+    public void drop(State state, OnDropListener listener) throws IllegalArgumentException {
         try {
-            if (state.getId() == -1) throw new IllegalArgumentException("The entity must have an ID assigned to drop it from database");
-    
+            if (state.getId() == -1)
+                throw new IllegalArgumentException("The entity must have an ID assigned to drop it from database");
+
             String sqlDrop = "DELETE FROM " +
-                SQLDataBaseLite.DB_STATE_TABLE +
-                "WHERE id = " + state.getId();
-    
+                    SQLDataBaseLite.DB_STATE_TABLE +
+                    "WHERE id = " + state.getId();
+
             dataBase.executeUpdate(sqlDrop);
             listener.onDrop(true);
         } catch (SQLException throwables) {
@@ -205,14 +203,15 @@ public class DataBaseWriteSQLite implements DataBaseWrite {
     }
 
     @Override
-    public void drop(SanitaryRegion sanitaryRegion, OnDropListener listener) throws IllegalArgumentException{
+    public void drop(SanitaryRegion sanitaryRegion, OnDropListener listener) throws IllegalArgumentException {
         try {
-            if (sanitaryRegion.getId() == -1) throw new IllegalArgumentException("The entity must have an ID assigned to drop it from database");
-    
+            if (sanitaryRegion.getId() == -1)
+                throw new IllegalArgumentException("The entity must have an ID assigned to drop it from database");
+
             String sqlDrop = "DELETE FROM " +
-                SQLDataBaseLite.DB_SANITARYREGION_TABLE +
-                "WHERE id = " + sanitaryRegion.getId();
-    
+                    SQLDataBaseLite.DB_SANITARYREGION_TABLE +
+                    "WHERE id = " + sanitaryRegion.getId();
+
             dataBase.executeUpdate(sqlDrop);
             listener.onDrop(true);
         } catch (SQLException throwables) {

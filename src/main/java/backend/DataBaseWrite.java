@@ -1,6 +1,6 @@
 package backend;
 
-import Model.*;
+import model.*;
 
 public interface DataBaseWrite {
 
@@ -34,7 +34,7 @@ public interface DataBaseWrite {
      */
     void write(SanitaryRegion sanitaryRegion, OnWriteListener listener);
 
-        /**
+    /**
      * @param user
      * @param listener
      * @throws IllegalArgumentException if the given entity does not have an ID assigned

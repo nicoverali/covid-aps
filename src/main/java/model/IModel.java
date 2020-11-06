@@ -1,4 +1,4 @@
-package Model;
+package model;
 
 //TODO hay que agregar los IDS a los modelos
 public interface IModel {
@@ -19,10 +19,10 @@ public interface IModel {
     void deleteState(int id_state);
 
     void createDistrict(float surface, String name, int population, int id_district, int zipCode, SanitaryRegion mySanitaryRegion,
-                        State myState, Mayor mayor);
+                        State myState);
 
     void updateDistrict(float surface, String name, int population, int id_district, int zipCode, SanitaryRegion mySanitaryRegion,
-                        State myState, Mayor mayor);
+                        State myState);
 
     void deleteDistrict(int id_district);
 

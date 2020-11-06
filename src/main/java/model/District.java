@@ -1,4 +1,4 @@
-package Model;
+package model;
 
 public class District extends Environment {
     private final int id;
