@@ -23,6 +23,7 @@ class DataBaseSQLiteTest {
         });
     }
 
+
     @Test
     public void testSanitaryInsert() {
         DataBaseWrite dbWrite = DataBaseWriteSQLite.getInstance();

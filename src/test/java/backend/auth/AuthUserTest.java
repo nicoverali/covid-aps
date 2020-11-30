@@ -24,6 +24,7 @@ class AuthUserTest {
                 assertEquals(user.getDni(), "123456");
             }
 
+
             @Override
             public void onFail(String message) {
                 fail(message);
