@@ -15,9 +15,7 @@ CREATE TABLE "Establishment" (
  "name"    varchar(50) NOT NULL,
  "address" varchar(50) NOT NULL,
  "district"      bigint NOT NULL,
- "is_valid"  boolean NOT NULL,
-
- CONSTRAINT "FK_76" FOREIGN KEY ( "district" ) REFERENCES "District" ( "id" )
+ "is_valid"  boolean NOT NULL
 );
 
 CREATE TABLE "EstablishmentPatients" (
@@ -29,7 +27,7 @@ CREATE TABLE "EstablishmentPatients" (
     "fallecidos" bigint NOT NULL,
 
     CONSTRAINT "FK_86" FOREIGN KEY ( "establishment_id" ) REFERENCES "Establishment" ( "id" )
-)
+);
 
 CREATE TABLE "EstablishmentResources" (
     "id"        INTEGER PRIMARY KEY,
@@ -37,10 +35,9 @@ CREATE TABLE "EstablishmentResources" (
     "camas_simples" bigint NOT NULL,
     "camas_uti" bigint NOT NULL,
     "respiradores_en_uso" bigint NOT NULL,
-    "fallecidos" bigint NOT NULL,
 
     CONSTRAINT "FK_87" FOREIGN KEY ( "establishment_id" ) REFERENCES "Establishment" ( "id" )
-)
+);
 
 CREATE INDEX "fkIdx_76" ON "Establishment" (
  "district"

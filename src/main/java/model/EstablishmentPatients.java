@@ -1,16 +1,29 @@
 package model;
 
-public class Pacients {
+public class EstablishmentPatients {
+
+    private int id = -1;
+    private int establishmentId;
+
+    public int getEstablishmentId() {
+        return establishmentId;
+    }
+
+    public void setEstablishmentId(int establishmentId) {
+        this.establishmentId = establishmentId;
+    }
+
     private int totalInfected;
     private int totalSuspicious;
     private int totalRecovered;
     private int totalDeceased;
 
-    public Pacients(int totalInfected, int totalSuspicious, int totalRecovered, int totalDeceased) {
-        this.totalInfected = totalInfected;
-        this.totalSuspicious = totalSuspicious;
-        this.totalRecovered = totalRecovered;
-        this.totalDeceased = totalDeceased;
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 
     public void setTotalInfected(int totalInfected) {

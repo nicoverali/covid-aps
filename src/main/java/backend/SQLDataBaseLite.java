@@ -14,6 +14,8 @@ public class SQLDataBaseLite implements SQLDataBase {
     public static final String DB_SANITARYREGION_TABLE = "SanitaryRegion";
     public static final String DB_USER_TABLE = "User";
     public static final String DB_ROLE_TABLE = "Role";
+    public static final String DB_ESTABLISHMENT_RESOURCES_TABLE = "EstablishmentResources";
+    public static final String DB_ESTABLISHMENT_PATIENTS_TABLE = "EstablishmentPatients";
     private static final String DB_RELATIVE_PATH = "database.db";
 
     private static SQLDataBaseLite instance;

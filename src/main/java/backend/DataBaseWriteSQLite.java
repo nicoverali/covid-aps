@@ -74,7 +74,12 @@ public class DataBaseWriteSQLite implements DataBaseWrite {
     @Override
     public void write(Establishment establishment, OnWriteListener listener) {
         try {
-            String id = establishment.getId() != -1 ? String.valueOf(establishment.getId()) : "NULL";
+            String id;
+            if (establishment.getId() == -1) {
+                id = "NULL";
+            } else {
+                id = String.valueOf(establishment.getId());
+            }
 
             String sqlUpdate = "INSERT OR REPLACE INTO " +
                     SQLDataBaseLite.DB_ESTABLISHMENT_TABLE +
@@ -126,6 +131,54 @@ public class DataBaseWriteSQLite implements DataBaseWrite {
                     id + "," +
                     "\"" + sanitaryRegion.getName() + "\"" +
                     sanitaryRegion.getDistricts() + // TODO no entiendo la relacion district-sanitaryregion
+                    ");";
+
+            dataBase.executeUpdate(sqlUpdate);
+
+            listener.onWrite(true);
+        } catch (SQLException throwables) {
+            listener.onWrite(false);
+        }
+    }
+
+    @Override
+    public void write(EstablishmentResources establishmentResources, OnWriteListener listener) {
+        try {
+            String id = establishmentResources.getId() != -1 ? String.valueOf(establishmentResources.getId()) : "NULL";
+
+            String sqlUpdate = "INSERT OR REPLACE INTO " +
+                    SQLDataBaseLite.DB_ESTABLISHMENT_RESOURCES_TABLE +
+                    " VALUES (" +
+                    id + "," +
+                    "\"" + establishmentResources.getEstablishmentId() + "\"" +
+                    "\"" + establishmentResources.getTotalSimpleBedsUsed() + "\"" +
+                    "\"" + establishmentResources.getTotalIntensiveTherapyBedsUsed() + "\"" +
+                    "\"" + establishmentResources.getTotalRespirators() + "\"" +
+                    ");";
+
+            dataBase.executeUpdate(sqlUpdate);
+
+            listener.onWrite(true);
+        } catch (SQLException throwables) {
+            listener.onWrite(false);
+        }
+    }
+
+    @Override
+    public void write(EstablishmentPatients resources, OnWriteListener listener) {
+        try {
+            // NULL indica que el valor del id se autoincremente
+            String id = resources.getId() != -1 ? String.valueOf(resources.getId()) : "NULL";
+
+            String sqlUpdate = "INSERT OR REPLACE INTO " +
+                    SQLDataBaseLite.DB_ESTABLISHMENT_PATIENTS_TABLE +
+                    " VALUES (" +
+                    id + "," +
+                    "\"" + resources.getEstablishmentId() + "\"" +
+                    "\"" + resources.getTotalInfected() + "\"" +
+                    "\"" + resources.getTotalSuspicious() + "\"" +
+                    "\"" + resources.getTotalRecovered() + "\"" +
+                    "\"" + resources.getTotalDeceased() + "\"" +
                     ");";
 
             dataBase.executeUpdate(sqlUpdate);

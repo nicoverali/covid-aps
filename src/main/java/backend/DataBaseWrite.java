@@ -35,6 +35,18 @@ public interface DataBaseWrite {
     void write(SanitaryRegion sanitaryRegion, OnWriteListener listener);
 
     /**
+     * @param establishmentResources
+     * @param listener
+     */
+    void write(EstablishmentResources establishmentResources, OnWriteListener listener);
+
+    /**
+     * @param resources
+     * @param listener
+     */
+    void write(EstablishmentPatients resources, OnWriteListener listener);
+
+    /**
      * @param user
      * @param listener
      * @throws IllegalArgumentException if the given entity does not have an ID assigned
@@ -68,7 +80,6 @@ public interface DataBaseWrite {
      * @throws IllegalArgumentException if the given entity does not have an ID assigned
      */
     void drop(SanitaryRegion sanitaryRegion, OnDropListener listener) throws IllegalArgumentException;
-
 
     interface OnDropListener {
         /**

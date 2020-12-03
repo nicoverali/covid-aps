@@ -42,7 +42,6 @@ public interface DataBaseRead {
      */
     void getEstablishmentList(Bundle bundle, OnEstablishmentListReadListener listener);
 
-
     interface OnUserListReadListener {
         void onRead(List<User> userList);
     }

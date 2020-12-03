@@ -37,7 +37,6 @@ public class State extends Environment {
         this.name = name;
     }
 
-    //TODO ids deben tener valor por defecto -1
     public int getId() {
         return id;
     }

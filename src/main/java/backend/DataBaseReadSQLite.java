@@ -224,9 +224,59 @@ public class DataBaseReadSQLite implements DataBaseRead {
             is_valid = resultSet.getBoolean("is_valid");
 
             establishment = new Establishment(id, name, address, districtId, is_valid);
-
+            establishment.setResources(getEstablishmentResource(id));
+            establishment.setPatients(getEstablishmentPatients(id));
             districtList.add(establishment);
         }
         return districtList;
+    }
+
+    private EstablishmentResources getEstablishmentResource(int establishmentId) {
+        String sqlQuery = "SELECT * FROM " + SQLDataBaseLite.DB_ESTABLISHMENT_RESOURCES_TABLE;
+        Bundle bundle = new Bundle();
+        bundle.putInt("establishment_id", establishmentId);
+        sqlQuery = addConditions(bundle, sqlQuery);
+
+        try {
+            ResultSet resultSet = dataBaseSQLite.executeQuery(sqlQuery);
+
+            if (resultSet.next()) {
+                EstablishmentResources out = new EstablishmentResources();
+                out.setEstablishmentId(establishmentId);
+                out.setId(resultSet.getInt("id"));
+                out.setTotalSimpleBedsUsed(resultSet.getInt("camas_simples"));
+                out.setTotalIntensiveTherapyBedsUsed(resultSet.getInt("camas_uti"));
+                out.setTotalRespirators(resultSet.getInt("respiradores_en_uso"));
+                return out;
+            }
+        } catch (SQLException ignored) {
+
+        }
+        return null;
+    }
+
+    private EstablishmentPatients getEstablishmentPatients(int establishmentId) {
+        String sqlQuery = "SELECT * FROM " + SQLDataBaseLite.DB_ESTABLISHMENT_PATIENTS_TABLE;
+        Bundle bundle = new Bundle();
+        bundle.putInt("establishment_id", establishmentId);
+        sqlQuery = addConditions(bundle, sqlQuery);
+
+        try {
+            ResultSet resultSet = dataBaseSQLite.executeQuery(sqlQuery);
+
+            if (resultSet.next()) {
+                EstablishmentPatients out = new EstablishmentPatients();
+                out.setEstablishmentId(establishmentId);
+                out.setId(resultSet.getInt("id"));
+                out.setTotalInfected(resultSet.getInt("contagiados"));
+                out.setTotalSuspicious(resultSet.getInt("sospechosos"));
+                out.setTotalRecovered(resultSet.getInt("recuperados"));
+                out.setTotalDeceased(resultSet.getInt("fallecidos"));
+                return out;
+            }
+        } catch (SQLException ignored) {
+
+        }
+        return null;
     }
 }

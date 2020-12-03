@@ -1,19 +1,21 @@
 package model;
 
-public class Resources {
+public class EstablishmentResources {
 
+    private int id = -1;
     private int totalSimpleBedsFree;
     private int totalIntensiveTherapyBedsFree;
     private int totalSimpleBedsUsed;
     private int totalIntensiveTherapyBedsUsed;
     private int totalRespirators;
+    private int establishmentId;
 
-    public Resources(int totalSimpleBedsFree, int totalIntensiveTherapyBedsFree, int totalSimpleBedsUsed, int totalIntensiveTherapyBedsUsed, int totalRespirators) {
-        this.totalSimpleBedsFree = totalSimpleBedsFree;
-        this.totalIntensiveTherapyBedsFree = totalIntensiveTherapyBedsFree;
-        this.totalSimpleBedsUsed = totalSimpleBedsUsed;
-        this.totalIntensiveTherapyBedsUsed = totalIntensiveTherapyBedsUsed;
-        this.totalRespirators = totalRespirators;
+    public int getEstablishmentId() {
+        return establishmentId;
+    }
+
+    public void setEstablishmentId(int establishmentId) {
+        this.establishmentId = establishmentId;
     }
 
     public void setTotalSimpleBedsFree(int totalSimpleBedsFree) {
@@ -54,5 +56,14 @@ public class Resources {
 
     public int getTotalRespirators() {
         return totalRespirators;
+    }
+
+    //TODO ids deben tener valor por defecto -1
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 }
