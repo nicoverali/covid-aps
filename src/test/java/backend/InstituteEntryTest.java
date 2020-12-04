@@ -13,10 +13,12 @@ public class InstituteEntryTest {
         DataBaseWrite write = DataBaseWriteSQLite.getInstance();
 
         write.write(establishment, result -> {
+
             DataBaseRead read = DataBaseReadSQLite.getInstance();
             read.getEstablishmentList(null, establishmentList -> {
 
                 Establishment establishmentReal = establishmentList.get(0);
+                System.out.println(establishmentReal.getName());
                 createResourcesPatients(establishmentReal);
             });
 

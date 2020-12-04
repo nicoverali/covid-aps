@@ -84,10 +84,10 @@ public class DataBaseWriteSQLite implements DataBaseWrite {
             String sqlUpdate = "INSERT OR REPLACE INTO " +
                     SQLDataBaseLite.DB_ESTABLISHMENT_TABLE +
                     " VALUES (" +
-                    id + "," +
+                    id  +
                     ", \"" + establishment.getName() + "\" ," +
                     "\"" + establishment.getAddress() + "\" ," +
-                    establishment.getDistrictId() +
+                    establishment.getDistrictId() + ", " +
                     establishment.isValid() +
                     ");";
 
@@ -95,6 +95,7 @@ public class DataBaseWriteSQLite implements DataBaseWrite {
 
             listener.onWrite(true);
         } catch (SQLException throwables) {
+            System.out.println(throwables.getMessage());
             listener.onWrite(false);
         }
     }

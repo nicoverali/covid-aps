@@ -6,8 +6,8 @@ import java.util.Set;
 
 public class Bundle {
 
-    private Map<String, String> stringMap;
-    private Map<String, Integer> intMap;
+    private Map<String, String> stringMap = new HashMap<String, String>();
+    private Map<String, Integer> intMap = new HashMap<String,Integer>();
 
     public void putString(String key, String value) {
         if (stringMap == null) {

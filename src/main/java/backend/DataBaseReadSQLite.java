@@ -7,6 +7,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Set;
 
 public class DataBaseReadSQLite implements DataBaseRead {
 
@@ -30,6 +31,9 @@ public class DataBaseReadSQLite implements DataBaseRead {
             StringBuilder sqlBuilder = new StringBuilder(sqlQuery);
             sqlBuilder.append(" WHERE ");
 
+            Set<String> list =  bundle.getIntKeySet();
+            if(list.size()==0)
+                System.out.println("Lista vacia");
             Iterator<String> iterator = bundle.getStringKeySet().iterator();
             String key;
             String expectedValue;
@@ -205,6 +209,7 @@ public class DataBaseReadSQLite implements DataBaseRead {
             listener.onRead(establishmentList);
 
         } catch (SQLException ignored) {
+            System.out.println(ignored.getMessage());
             listener.onRead(null);
         }
     }
@@ -220,7 +225,7 @@ public class DataBaseReadSQLite implements DataBaseRead {
             id = resultSet.getInt("id");
             name = resultSet.getString("name");
             address = resultSet.getString("address");
-            districtId = resultSet.getInt("districtId");
+            districtId = resultSet.getInt("district");
             is_valid = resultSet.getBoolean("is_valid");
 
             establishment = new Establishment(id, name, address, districtId, is_valid);
